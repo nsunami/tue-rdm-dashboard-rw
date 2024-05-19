@@ -5,7 +5,7 @@
 // https://www.prisma.io/docs/orm/prisma-migrate
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -14,11 +14,158 @@ generator client {
   binaryTargets = "native"
 }
 
-// Define your own datamodels here and run `yarn redwood prisma migrate dev`
-// to create migrations for them and apply to your dev DB.
-// TODO: Please remove the following example:
-model UserExample {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+model Item {
+  id                          Int             @id @default(autoincrement())
+  files                       File[]
+  custom_fields               CustomField[]
+  authors                     Author[]
+  figshare_url                String?
+  description                 String
+  funding                     String?
+  funding_list                FundingList[]
+  version                     Int
+  status                      Status?
+  size                        Int?
+  created_date                DateTime
+  modified_date               DateTime
+  is_public                   Boolean
+  is_confidential             Boolean
+  is_metadata_record          Boolean
+  confidential_reason         String
+  metadata_reason             String
+  license                     License         @relation(fields: [licenseId], references: [id])
+  tags                        String[]
+  categories                  Category[]
+  references                  String[]
+  has_linked_file             Boolean
+  citation                    String?
+  is_embargoed                Boolean
+  embargo_date                DateTime?
+  embargo_type                String?
+  embargo_title               String?
+  embargo_reason              String?
+  embargo_options             EmbargoOption[]
+  uuid                        String
+  title                       String
+  doi                         String
+  handle                      String
+  url                         String
+  published_date              DateTime
+  thumb                       String
+  defined_type                Int
+  defined_type_name           DefinedTypeName
+  group_id                    Int
+  url_private_api             String
+  url_public_api              String
+  url_private_html            String
+  url_public_html             String
+  timeline                    Timeline        @relation(fields: [timelineId], references: [id])
+  resource_title              String
+  resource_doi                String
+  agreed_to_deposit_agreement Boolean
+  agreed_to_publish           Boolean
+  licenseId                   Int
+  timelineId                  Int
+}
+
+model Author {
+  id        Int     @id @default(autoincrement())
+  uuid      String
+  full_name String
+  is_active Boolean
+  url_name  String?
+  orcid_id  String
+  items     Item[]
+}
+
+model Category {
+  id          Int     @id @default(autoincrement())
+  uuid        String
+  title       String
+  parent_id   Int?
+  parent_uuid String?
+  path        String
+  source_id   Int?
+  taxonomy_id Int?
+  items       Item[]
+}
+
+model CustomField {
+  id    Int             @id @default(autoincrement())
+  name  CustomFieldName
+  value String[]
+  items Item[]
+}
+
+enum CustomFieldName {
+  Contributors
+  DataLink
+  DerivedFrom
+  Format
+  Geolocation
+  GeolocationLatitude
+  GeolocationLongitude
+  Language
+  LicenceRemarks
+  Organizations
+  Publisher
+  SameAs
+  TimeCoverage
+}
+
+enum DefinedTypeName {
+  dataset
+}
+
+model EmbargoOption {
+  id    Int    @id @default(autoincrement())
+  type  String
+  items Item[]
+}
+
+model File {
+  id            Int     @id @default(autoincrement())
+  uuid          String
+  name          String
+  size          Int
+  is_link_only  Boolean
+  is_incomplete Boolean
+  download_url  String
+  supplied_md5  String?
+  computed_md5  String
+  items         Item[]
+}
+
+model FundingList {
+  id              Int     @id @default(autoincrement())
+  uuid            String
+  title           String
+  grant_code      String
+  funder_name     String?
+  is_user_defined Int?
+  url             String?
+  items           Item[]
+}
+
+model License {
+  id    Int    @id @default(autoincrement())
+  value Int
+  name  String
+  url   String
+  items Item[]
+}
+
+enum Status {
+  Private
+  Public
+}
+
+model Timeline {
+  id                   Int       @id @default(autoincrement())
+  posted               DateTime
+  revision             DateTime?
+  submission           DateTime?
+  firstOnline          DateTime
+  publisherPublication DateTime?
+  items                Item[]
 }
