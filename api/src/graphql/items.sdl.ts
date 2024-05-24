@@ -4,20 +4,18 @@ export const schema = gql`
     uuid: String!
     title: String!
     doi: String!
-    itemUrl: String!
-    publishedOn: String!
-    type: String!
-    typeName: String!
-    groupId: String!
-    webUrl: String!
-    postedOn: String!
-    firstOnlineOn: String!
-    revisedOn: String!
-    resourceTitle: String
-    resourceDoi: String
+    license: License!
+    description: String!
+    url_public_html: String!
+    published_date: DateTime!
+  }
+
+  type License {
+    id: Int
+    name: String
   }
 
   type Query {
-    getItems(type: String!): [Item!] @skipAuth
+    Items: [Item!] @skipAuth
   }
 `

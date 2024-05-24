@@ -6,24 +6,21 @@ import type {
   TypedDocumentNode,
 } from '@redwoodjs/web'
 
+import Item from '../Item/Item'
+
 export const QUERY: TypedDocumentNode<ItemsQuery, ItemsQueryVariables> = gql`
-  query ItemsQuery($type: String!) {
-    items: getItems(type: $type) {
+  query ItemsQuery {
+    items: Items {
       id
       uuid
       title
       doi
-      itemUrl
-      publishedOn
-      type
-      typeName
-      groupId
-      webUrl
-      postedOn
-      firstOnlineOn
-      revisedOn
-      resourceTitle
-      resourceDoi
+      description
+      url_public_html
+      published_date
+      license {
+        name
+      }
     }
   }
 `
@@ -40,7 +37,7 @@ export const Success = ({ items }: CellSuccessProps<ItemsQuery>) => {
   return (
     <ul>
       {items.map((item) => {
-        return <li key={item.id}>{JSON.stringify(item)}</li>
+        return <Item key={item.id} item={item} />
       })}
     </ul>
   )
