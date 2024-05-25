@@ -15,7 +15,13 @@ export const schema = gql`
     name: String
   }
 
+  type ItemsPerTime {
+    count: BigInt
+    date: DateTime
+  }
+
   type Query {
     Items: [Item!] @skipAuth
+    itemsOverTime(timeFrame: String!): [ItemsPerTime] @skipAuth
   }
 `
