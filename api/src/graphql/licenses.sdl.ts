@@ -13,12 +13,9 @@ export const schema = gql`
     licenseCounts: [LicenseCount] @skipAuth
   }
   type LicenseCount {
-    _count: ByNameCount
+    count: Int
     value: Int
     name: String
-  }
-  type ByNameCount {
-    name: Int
   }
 
   input CreateLicenseInput {

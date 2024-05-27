@@ -1,3 +1,4 @@
+import { BarList, Card } from '@tremor/react'
 import type { LicensesQuery, LicensesQueryVariables } from 'types/graphql'
 
 import type {
@@ -12,10 +13,8 @@ export const QUERY: TypedDocumentNode<
 > = gql`
   query licensesCounts {
     licenseCounts {
-      _count {
-        name
-      }
       name
+      count
       value
     }
   }
@@ -31,10 +30,13 @@ export const Failure = ({ error }: CellFailureProps) => (
 
 export const Success = ({ licenseCounts }: CellSuccessProps<LicensesQuery>) => {
   return (
-    <ul>
-      {licenseCounts.map((item) => {
-        return <li key={item.value}>{JSON.stringify(item)}</li>
-      })}
-    </ul>
+    <>
+      <Card>
+        <BarList
+          color={'slate-300'}
+          data={licenseCounts.map((e) => ({ ...e, value: e.count }))}
+        />
+      </Card>
+    </>
   )
 }

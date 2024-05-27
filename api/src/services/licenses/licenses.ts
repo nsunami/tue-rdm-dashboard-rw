@@ -17,7 +17,21 @@ export const license: QueryResolvers['license'] = ({ id }) => {
 }
 
 export const licenseCounts = () => {
-  return db.license.groupBy({ by: ['value', 'name'], _count: { name: true } })
+  return db.license
+    .groupBy({
+      by: ['value', 'name'],
+      _count: { name: true },
+      orderBy: {
+        _count: {
+          name: 'desc',
+        },
+      },
+    })
+    .then((data) =>
+      data.map((e) => {
+        return { name: e.name, count: e._count.name, value: e.value }
+      })
+    )
 }
 
 export const createLicense: MutationResolvers['createLicense'] = ({
