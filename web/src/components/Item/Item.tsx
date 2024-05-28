@@ -26,8 +26,8 @@ const Item = ({ item }) => {
           </a>
         </CardTitle>
         <CardDescription className="flex flex-row place-content-between">
-          <div>{formatDate(published_date)}</div>
-          <div>{license.name}</div>
+          <span>{formatDate(published_date)}</span>
+          <span>{license.name}</span>
         </CardDescription>
       </CardHeader>
       <CardContent>
