@@ -1712,7 +1712,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.7":
+"@babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.24.1, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.7":
   version: 7.24.6
   resolution: "@babel/runtime@npm:7.24.6"
   dependencies:
@@ -4466,6 +4466,37 @@ __metadata:
     "@prisma/prisma-schema-wasm": "npm:5.14.0-17.56ca112d5a19c9925b53af75c3c6b7ada97f9f85"
     fs-extra: "npm:11.1.1"
   checksum: 10c0/0b75b03933d7475ebb8542ffb1eba007cd533c44825cac4bfbeb7df287dfa1f49c61944646d1924538d31d1c5ad9fd482186ac834d09fbdd36df4ac1f0689071
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-compose-refs@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-compose-refs@npm:1.0.1"
+  dependencies:
+    "@babel/runtime": "npm:^7.13.10"
+  peerDependencies:
+    "@types/react": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 10c0/be06f8dab35b5a1bffa7a5982fb26218ddade1acb751288333e3b89d7b4a7dfb5a6371be83876dac0ec2ebe0866d295e8618b778608e1965342986ea448040ec
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-slot@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@radix-ui/react-slot@npm:1.0.2"
+  dependencies:
+    "@babel/runtime": "npm:^7.13.10"
+    "@radix-ui/react-compose-refs": "npm:1.0.1"
+  peerDependencies:
+    "@types/react": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 10c0/3af6ea4891e6fa8091e666802adffe7718b3cd390a10fa9229a5f40f8efded9f3918ea01b046103d93923d41cc32119505ebb6bde76cad07a87b6cf4f2119347
   languageName: node
   linkType: hard
 
@@ -8552,6 +8583,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"class-variance-authority@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "class-variance-authority@npm:0.7.0"
+  dependencies:
+    clsx: "npm:2.0.0"
+  checksum: 10c0/e11c57edf4bf50ef1c97bae41d68885afbaaedba26c48b7cc5dfb033390fed7012147e9532168d8c4f3497fce4dff15e20e6e60b8c9c9a4b0fe26b0e804513db
+  languageName: node
+  linkType: hard
+
 "clean-css@npm:^5.2.2":
   version: 5.3.3
   resolution: "clean-css@npm:5.3.3"
@@ -8696,7 +8736,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^2.0.0":
+"clsx@npm:2.0.0":
+  version: 2.0.0
+  resolution: "clsx@npm:2.0.0"
+  checksum: 10c0/c09f43b3144a0b7826b6b11b6a111b2c7440831004eecc02d333533c5e58ef0aa5f2dce071d3b25fbb8c8ea97b45df96c74bcc1d51c8c2027eb981931107b0cd
+  languageName: node
+  linkType: hard
+
+"clsx@npm:^2.0.0, clsx@npm:^2.1.1":
   version: 2.1.1
   resolution: "clsx@npm:2.1.1"
   checksum: 10c0/c4c8eb865f8c82baab07e71bfa8897c73454881c4f99d6bc81585aecd7c441746c1399d08363dc096c550cceaf97bd4ce1e8854e1771e9998d9f94c4fe075839
@@ -15142,6 +15189,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lucide-react@npm:^0.379.0":
+  version: 0.379.0
+  resolution: "lucide-react@npm:0.379.0"
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0
+  checksum: 10c0/b2521db4b2329e51f3b31abf5f6e03caa6cc1c736e8dc27e79fd92c09ed2e95bd7d85ea46a765d264ddbafb525c783bd4689ef512434972fdfcd33fa2bdfb1c6
+  languageName: node
+  linkType: hard
+
 "lz-string@npm:^1.5.0":
   version: 1.5.0
   resolution: "lz-string@npm:1.5.0"
@@ -19903,6 +19959,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tailwind-merge@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "tailwind-merge@npm:2.3.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.24.1"
+  checksum: 10c0/5ea308e23c3ab1cf4c3f35f0a471753f4d3ed232d63dd7c09151a74428737321902203d90e9f0cb76ea5c3978e71b0adbc503dc455e56cda967a7674ae4b94b5
+  languageName: node
+  linkType: hard
+
+"tailwindcss-animate@npm:^1.0.7":
+  version: 1.0.7
+  resolution: "tailwindcss-animate@npm:1.0.7"
+  peerDependencies:
+    tailwindcss: "*"
+  checksum: 10c0/ec7dbd1631076b97d66a1fbaaa06e0725fccfa63119221e8d87a997b02dcede98ad88bb1ef6665b968f5d260fcefb10592e0299ca70208d365b37761edf5e19a
+  languageName: node
+  linkType: hard
+
 "tailwindcss@npm:^3.4.3":
   version: 3.4.3
   resolution: "tailwindcss@npm:3.4.3"
@@ -21197,6 +21271,7 @@ __metadata:
   resolution: "web@workspace:web"
   dependencies:
     "@heroicons/react": "npm:1.0.6"
+    "@radix-ui/react-slot": "npm:^1.0.2"
     "@redwoodjs/forms": "npm:7.6.2"
     "@redwoodjs/router": "npm:7.6.2"
     "@redwoodjs/vite": "npm:7.6.2"
@@ -21205,11 +21280,16 @@ __metadata:
     "@types/react": "npm:^18.2.55"
     "@types/react-dom": "npm:^18.2.19"
     autoprefixer: "npm:^10.4.19"
+    class-variance-authority: "npm:^0.7.0"
+    clsx: "npm:^2.1.1"
+    lucide-react: "npm:^0.379.0"
     postcss: "npm:^8.4.38"
     postcss-loader: "npm:^8.1.1"
     react: "npm:18.2.0"
     react-dom: "npm:18.2.0"
+    tailwind-merge: "npm:^2.3.0"
     tailwindcss: "npm:^3.4.3"
+    tailwindcss-animate: "npm:^1.0.7"
   languageName: unknown
   linkType: soft
 
