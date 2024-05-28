@@ -21,7 +21,12 @@ const Item = ({ item }) => {
     <Card>
       <CardHeader>
         <CardTitle>
-          <a href={url_public_html} target="_blank" rel="noopener noreferrer">
+          <a
+            href={url_public_html}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="line-clamp-3"
+          >
             {title}
           </a>
         </CardTitle>
