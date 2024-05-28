@@ -6,7 +6,7 @@ import type {
   TypedDocumentNode,
 } from '@redwoodjs/web'
 
-import Item from '../Item/Item'
+import Item from 'src/components/Item'
 
 export const QUERY: TypedDocumentNode<ItemsQuery, ItemsQueryVariables> = gql`
   query ItemsQuery {
