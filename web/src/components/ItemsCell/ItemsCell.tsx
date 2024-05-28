@@ -36,9 +36,11 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({ items }: CellSuccessProps<ItemsQuery>) => {
   return (
     <>
-      {items.map((item) => {
-        return <Item key={item.id} item={item} />
-      })}
+      <div className="md:m-2 md:grid md:grid-cols-2 md:gap-2 lg:grid-cols-3">
+        {items.map((item) => {
+          return <Item key={item.id} item={item} />
+        })}
+      </div>
     </>
   )
 }
