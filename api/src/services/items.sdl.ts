@@ -1,7 +1,10 @@
 import { db } from 'src/lib/db'
 
 export function Items() {
-  return db.item.findMany({ include: { license: true } })
+  return db.item.findMany({
+    include: { license: true },
+    orderBy: { published_date: 'desc' },
+  })
 }
 
 type TimeFrameType = 'week' | 'month' | 'year'
