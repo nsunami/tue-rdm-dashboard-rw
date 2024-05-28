@@ -5,16 +5,20 @@ const Item = ({ item }) => {
     'text/html'
   ).body.textContent
 
+  function formatDate(date) {
+    return new Intl.DateTimeFormat('sv-SE').format(new Date(date))
+  }
+
   return (
-    <div>
-      <h2>
+    <div className="my-1 border">
+      <h2 className="font-bold">
         <a href={url_public_html} target="_blank" rel="noopener noreferrer">
           {title}
         </a>
       </h2>
       <div>{license.name}</div>
-      <div>{published_date}</div>
-      <p>{parsedDescription}</p>
+      <div>{formatDate(published_date)}</div>
+      <p className="line-clamp-2">{parsedDescription}</p>
     </div>
   )
 }

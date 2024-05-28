@@ -35,10 +35,10 @@ export const Failure = ({ error }: CellFailureProps) => (
 
 export const Success = ({ items }: CellSuccessProps<ItemsQuery>) => {
   return (
-    <ul>
+    <>
       {items.map((item) => {
         return <Item key={item.id} item={item} />
       })}
-    </ul>
+    </>
   )
 }
