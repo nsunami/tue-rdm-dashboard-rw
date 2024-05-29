@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { BarList, Card } from '@tremor/react'
+import { BarList } from '@tremor/react'
 import type { LicensesQuery, LicensesQueryVariables } from 'types/graphql'
 
 import type {
@@ -8,6 +8,8 @@ import type {
   CellFailureProps,
   TypedDocumentNode,
 } from '@redwoodjs/web'
+
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 
 export const QUERY: TypedDocumentNode<
   LicensesQuery,
@@ -42,20 +44,28 @@ export const Success = ({
 
   return (
     <>
-      <Card>
-        <BarList
-          onClick={() => setShowPercent((c) => !c)}
-          color={'slate-300'}
-          data={licenseCounts.map((e) => {
-            if (showPercent)
-              return { ...e, value: ((e.count / itemsTotal) * 100).toFixed(1) }
-            return { ...e, value: e.count }
-          })}
-          valueFormatter={(v) => {
-            if (showPercent) return `${v}%`
-            return v
-          }}
-        />
+      <Card className="mx-auto max-w-2xl">
+        <CardHeader>
+          <CardTitle>Licenses</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <BarList
+            onClick={() => setShowPercent((c) => !c)}
+            color={'secondary'}
+            data={licenseCounts.map((e) => {
+              if (showPercent)
+                return {
+                  ...e,
+                  value: ((e.count / itemsTotal) * 100).toFixed(1),
+                }
+              return { ...e, value: e.count }
+            })}
+            valueFormatter={(v) => {
+              if (showPercent) return `${v}%`
+              return v
+            }}
+          />
+        </CardContent>
       </Card>
     </>
   )
