@@ -24,3 +24,7 @@ export function itemsOverTime({
 
   return result
 }
+
+export function itemsTotal() {
+  return db.item.count()
+}

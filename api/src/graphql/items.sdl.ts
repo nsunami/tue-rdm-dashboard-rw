@@ -23,5 +23,6 @@ export const schema = gql`
   type Query {
     Items: [Item!] @skipAuth
     itemsOverTime(timeFrame: String!): [ItemsPerTime] @skipAuth
+    itemsTotal: BigInt @skipAuth
   }
 `
