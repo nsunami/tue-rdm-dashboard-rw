@@ -33,6 +33,11 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ licenseCounts }: CellSuccessProps<LicensesQuery>) => {
+  const itemsTotal = licenseCounts.reduce(
+    (accumulator, currentLicense) => accumulator + currentLicense.count,
+    0
+  )
+
   return (
     <>
       <Card>
@@ -45,11 +50,14 @@ export const Success = ({ licenseCounts }: CellSuccessProps<LicensesQuery>) => {
             data={licenseCounts.map((e) => {
               return {
                 ...e,
-                value: `${e.count} (${(e.prop * 100).toFixed(2)}%)`,
+                value: e.count,
                 href: routes.datasets({ license: e.name }),
                 target: '_self',
               }
             })}
+            valueFormatter={(v) => {
+              return `${v} (${((v / itemsTotal) * 100).toFixed(1)}%)`
+            }}
           />
         </CardContent>
       </Card>

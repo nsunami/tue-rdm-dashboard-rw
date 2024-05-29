@@ -1,4 +1,5 @@
 import { render } from '@redwoodjs/testing/web'
+
 import { Loading, Empty, Failure, Success } from './LicensesCell'
 import { standard } from './LicensesCell.mock'
 
@@ -35,7 +36,7 @@ describe('LicensesCell', () => {
 
   it('renders Success successfully', async () => {
     expect(() => {
-      render(<Success licenses={standard().licenses} />)
+      render(<Success licenseCounts={standard().licenses} />)
     }).not.toThrow()
   })
 })
