@@ -15,7 +15,9 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
   return (
     <>
       <header className="my-2 flex w-full flex-row items-center">
-        <h1 className="mx-1 font-bold">4TU.RD - TU/e Dashboard</h1>
+        <h1 className="mx-1 font-bold">
+          <Link to={routes.home()}>4TU.RD - TU/e Dashboard</Link>
+        </h1>
         <NavigationMenu>
           <NavigationMenuList>
             <Link to={routes.home()}>
