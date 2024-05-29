@@ -1,8 +1,11 @@
+import { Github } from 'lucide-react'
+
 import { Metadata } from '@redwoodjs/web'
 
 import {
   Card,
   CardContent,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from 'src/components/ui/card'
@@ -32,6 +35,16 @@ const HomePage = () => {
             </a>{' '}
             from the TU/e research community.
           </CardContent>
+          <CardFooter className="text-slate-500 hover:underline">
+            <a
+              href="https://github.com/nsunami/tue-rdm-dashboard-rw"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Github className="mr-1 inline" />
+              Code available on GitHub
+            </a>
+          </CardFooter>
         </Card>
         <ItemsTotalCell />
         <ItemsOverTimeCell timeFrame="year" />
