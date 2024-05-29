@@ -1,4 +1,3 @@
-import { Database, Table2 } from 'lucide-react'
 import type {
   FindItemsTotalQuery,
   FindItemsTotalQueryVariables,
@@ -10,13 +9,7 @@ import type {
   TypedDocumentNode,
 } from '@redwoodjs/web'
 
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '../ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 
 export const QUERY: TypedDocumentNode<
   FindItemsTotalQuery,
