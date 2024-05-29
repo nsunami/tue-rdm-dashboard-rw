@@ -7,8 +7,10 @@ const HomePage = () => {
   return (
     <>
       <Metadata title="Home" description="Home page" />
-      <ItemsOverTimeCell timeFrame="year" />
-      <LicensesCell />
+      <section className="grid md:grid-cols-2 md:gap-2 md:px-2">
+        <ItemsOverTimeCell timeFrame="year" />
+        <LicensesCell />
+      </section>
     </>
   )
 }

@@ -1,4 +1,4 @@
-import { AreaChart, Card } from '@tremor/react'
+import { AreaChart } from '@tremor/react'
 import type {
   FindItemsOverTimeQuery,
   FindItemsOverTimeQueryVariables,
@@ -9,6 +9,8 @@ import type {
   CellFailureProps,
   TypedDocumentNode,
 } from '@redwoodjs/web'
+
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 
 export const QUERY: TypedDocumentNode<
   FindItemsOverTimeQuery,
@@ -52,12 +54,17 @@ export const Success = ({
   }
   return (
     <Card>
-      <AreaChart
-        yAxisWidth={60}
-        data={formatted}
-        categories={['count']}
-        index="formattedDate"
-      />
+      <CardHeader>
+        <CardTitle>Datasets Over Time</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <AreaChart
+          yAxisWidth={60}
+          data={formatted}
+          categories={['count']}
+          index="formattedDate"
+        />
+      </CardContent>
     </Card>
   )
 }

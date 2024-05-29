@@ -35,7 +35,7 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({ licenseCounts }: CellSuccessProps<LicensesQuery>) => {
   return (
     <>
-      <Card className="mx-auto max-w-2xl">
+      <Card>
         <CardHeader>
           <CardTitle>Licenses</CardTitle>
         </CardHeader>
