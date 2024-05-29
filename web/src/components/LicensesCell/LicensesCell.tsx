@@ -1,8 +1,7 @@
-import { useState } from 'react'
-
 import { BarList } from '@tremor/react'
 import type { LicensesQuery, LicensesQueryVariables } from 'types/graphql'
 
+import { routes } from '@redwoodjs/router'
 import type {
   CellSuccessProps,
   CellFailureProps,
@@ -47,6 +46,8 @@ export const Success = ({ licenseCounts }: CellSuccessProps<LicensesQuery>) => {
               return {
                 ...e,
                 value: `${e.count} (${(e.prop * 100).toFixed(2)}%)`,
+                href: routes.datasets({ license: e.name }),
+                target: '_self',
               }
             })}
           />
