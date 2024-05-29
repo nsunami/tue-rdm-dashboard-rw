@@ -7,8 +7,8 @@ type DefaultLayoutProps = {
 const DefaultLayout = ({ children }: DefaultLayoutProps) => {
   return (
     <>
-      <header className="mx-1 my-2 flex w-full flex-row">
-        <h1 className="font-bold">4TU.RD - TU/e Dashboard</h1>
+      <header className="my-2 flex w-full flex-row">
+        <h1 className="mx-1 font-bold">4TU.RD - TU/e Dashboard</h1>
         <nav className="ml-2">
           <ul className="flex flex-row justify-evenly gap-2">
             <li>
