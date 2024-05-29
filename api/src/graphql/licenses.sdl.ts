@@ -14,6 +14,7 @@ export const schema = gql`
   }
   type LicenseCount {
     count: Int
+    prop: Float
     value: Int
     name: String
   }

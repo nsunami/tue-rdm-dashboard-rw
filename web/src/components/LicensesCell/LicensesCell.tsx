@@ -19,6 +19,7 @@ export const QUERY: TypedDocumentNode<
     licenseCounts {
       name
       count
+      prop
       value
     }
   }
@@ -32,16 +33,7 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error?.message}</div>
 )
 
-export const Success = ({
-  licenseCounts,
-  showPercent: defaultShowPercent = false,
-}: CellSuccessProps<LicensesQuery>) => {
-  const [showPercent, setShowPercent] = useState(defaultShowPercent)
-  const itemsTotal = licenseCounts.reduce(
-    (accumulator, current) => accumulator + current.count,
-    0
-  )
-
+export const Success = ({ licenseCounts }: CellSuccessProps<LicensesQuery>) => {
   return (
     <>
       <Card className="mx-auto max-w-2xl">
@@ -50,20 +42,13 @@ export const Success = ({
         </CardHeader>
         <CardContent>
           <BarList
-            onClick={() => setShowPercent((c) => !c)}
             color={'secondary'}
             data={licenseCounts.map((e) => {
-              if (showPercent)
-                return {
-                  ...e,
-                  value: ((e.count / itemsTotal) * 100).toFixed(1),
-                }
-              return { ...e, value: e.count }
+              return {
+                ...e,
+                value: `${e.count} (${(e.prop * 100).toFixed(2)}%)`,
+              }
             })}
-            valueFormatter={(v) => {
-              if (showPercent) return `${v}%`
-              return v
-            }}
           />
         </CardContent>
       </Card>

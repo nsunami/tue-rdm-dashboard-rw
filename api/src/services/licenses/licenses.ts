@@ -27,11 +27,21 @@ export const licenseCounts = () => {
         },
       },
     })
-    .then((data) =>
-      data.map((e) => {
-        return { name: e.name, count: e._count.name, value: e.value }
+    .then((data) => {
+      const totalItems = data.reduce(
+        (accumulator, current) => accumulator + current._count.name,
+        0
+      )
+
+      return data.map((e) => {
+        return {
+          name: e.name,
+          count: e._count.name,
+          prop: e._count.name / totalItems,
+          value: e.value,
+        }
       })
-    )
+    })
 }
 
 export const createLicense: MutationResolvers['createLicense'] = ({
