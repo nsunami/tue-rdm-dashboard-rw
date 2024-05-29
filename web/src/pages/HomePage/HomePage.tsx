@@ -21,7 +21,7 @@ const HomePage = () => {
       <section className="grid md:grid-cols-2 md:gap-2 md:px-2">
         <Card>
           <CardHeader>
-            <CardTitle>4TU.ResearchData Dashboard</CardTitle>
+            <CardTitle>TU/e 4TU.ResearchData Dashboard</CardTitle>
           </CardHeader>
           <CardContent>
             This dashboard shows the metrics for datasets posted on{' '}
