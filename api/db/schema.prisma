@@ -64,7 +64,7 @@ model Item {
 
 model Author {
   id        Int      @id @default(autoincrement())
-  uuid      String?
+  uuid      String   @unique
   full_name String?
   is_active Boolean?
   url_name  String?
@@ -74,7 +74,7 @@ model Author {
 
 model Category {
   id          Int     @id @default(autoincrement())
-  uuid        String
+  uuid        String  @unique
   title       String
   parent_id   Int?
   parent_uuid String?
@@ -99,7 +99,7 @@ model EmbargoOption {
 
 model File {
   id            Int     @id @default(autoincrement())
-  uuid          String?
+  uuid          String  @unique
   name          String
   size          BigInt
   is_link_only  Boolean
@@ -112,7 +112,7 @@ model File {
 
 model FundingList {
   id              Int     @id @default(autoincrement())
-  uuid            String
+  uuid            String  @unique
   title           String
   grant_code      String
   funder_name     String?
@@ -123,7 +123,7 @@ model FundingList {
 
 model License {
   id    Int    @id @default(autoincrement())
-  value Int
+  value Int    @unique
   name  String
   url   String
   items Item[]
