@@ -1,6 +1,3 @@
--- CreateEnum
-CREATE TYPE "DefinedTypeName" AS ENUM ('dataset', 'software');
-
 -- CreateTable
 CREATE TABLE "Item" (
     "id" SERIAL NOT NULL,
@@ -34,7 +31,7 @@ CREATE TABLE "Item" (
     "published_date" TIMESTAMP(3) NOT NULL,
     "thumb" TEXT NOT NULL,
     "defined_type" INTEGER NOT NULL,
-    "defined_type_name" "DefinedTypeName" NOT NULL,
+    "defined_type_name" TEXT NOT NULL,
     "group_id" INTEGER NOT NULL,
     "url_private_api" TEXT NOT NULL,
     "url_public_api" TEXT NOT NULL,
@@ -53,7 +50,7 @@ CREATE TABLE "Item" (
 -- CreateTable
 CREATE TABLE "Author" (
     "id" SERIAL NOT NULL,
-    "uuid" TEXT,
+    "uuid" TEXT NOT NULL,
     "full_name" TEXT,
     "is_active" BOOLEAN,
     "url_name" TEXT,
@@ -96,7 +93,7 @@ CREATE TABLE "EmbargoOption" (
 -- CreateTable
 CREATE TABLE "File" (
     "id" SERIAL NOT NULL,
-    "uuid" TEXT,
+    "uuid" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "size" BIGINT NOT NULL,
     "is_link_only" BOOLEAN NOT NULL,
@@ -181,6 +178,21 @@ CREATE TABLE "_FundingListToItem" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Item_doi_key" ON "Item"("doi");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Author_uuid_key" ON "Author"("uuid");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Category_uuid_key" ON "Category"("uuid");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "File_uuid_key" ON "File"("uuid");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "FundingList_uuid_key" ON "FundingList"("uuid");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "License_value_key" ON "License"("value");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_AuthorToItem_AB_unique" ON "_AuthorToItem"("A", "B");
