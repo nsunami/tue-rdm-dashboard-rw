@@ -85,7 +85,7 @@ export const Success = ({
       <CardContent>
         <BarChart width={400} height={500} data={datesWithLicenses}>
           <Tooltip />
-          <CartesianGrid />
+          <CartesianGrid vertical={false} strokeDasharray={5} />
           <YAxis />
           <XAxis dataKey={'date'} />
           {licenses.map((license) => (
