@@ -1,0 +1,15 @@
+export const LICENSES_PALLETTE = {
+  CC0: '#1f78b4',
+  'CC BY 4.0': '#fdbf6f',
+  'CC BY-NC 4.0': '#33a02c',
+  'CC BY-NC-SA 4.0': '#b2df8a',
+  'CC BY-SA 4.0': '#ff7f00',
+  'CC BY-NC-ND 4.0': '#C74200',
+  '4TU General Terms of Use': 'orange',
+  MIT: '#fb9a99',
+  'GPL-3.0': '#e31a1c',
+  'BSD-3-Clause': '#cab2d6',
+  'Restrictive Licence': '#6a3d9a',
+  'Apache-2.0': 'red',
+  'CC BY-NC-SA 3.0': '#b15928',
+}

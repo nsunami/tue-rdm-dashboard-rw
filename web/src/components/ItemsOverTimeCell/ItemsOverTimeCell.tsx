@@ -1,4 +1,12 @@
-import { AreaChart } from '@tremor/react'
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts'
 import type {
   FindItemsOverTimeQuery,
   FindItemsOverTimeQueryVariables,
@@ -10,16 +18,21 @@ import type {
   TypedDocumentNode,
 } from '@redwoodjs/web'
 
+import { LICENSES_PALLETTE } from 'src/lib/constants'
+import { formatToYYYY } from 'src/lib/formatToYyyy'
+
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 
 export const QUERY: TypedDocumentNode<
   FindItemsOverTimeQuery,
   FindItemsOverTimeQueryVariables
 > = gql`
-  query FindItemsOverTimeQuery($timeFrame: String!) {
-    itemsOverTime: itemsOverTime(timeFrame: $timeFrame) {
+  query FindItemsOverTimeQuery($timeFrame: String!, $groupBy: String!) {
+    itemsOverTime: itemsOverTime(timeFrame: $timeFrame, groupBy: $groupBy) {
       date
       count
+      licenseId
+      licenseName
     }
   }
 `
@@ -40,30 +53,51 @@ export const Success = ({
   FindItemsOverTimeQuery,
   FindItemsOverTimeQueryVariables
 >) => {
-  const formatted = itemsOverTime.map((entry) => {
-    return {
-      ...entry,
-      formattedDate: dateFormatter(entry.date),
-    }
-  })
+  const dates = [...new Set(itemsOverTime.map((i) => i.date))]
+  const formattedData = itemsOverTime.reduce((accumulator, currentValue) => {
+    const matchedDate = dates.find((d) => d === currentValue.date)
+    return [
+      ...accumulator,
+      {
+        date: matchedDate,
+        [currentValue.licenseName]: currentValue.count,
+      },
+    ]
+  }, [])
+  const datesWithLicenses = dates.map((date) => {
+    const matchedEntries = formattedData.filter((d) => d.date === date)
+    const merged = matchedEntries.reduce((acc, entry) => {
+      const { date, ...licenses } = entry
+      acc.date = formatToYYYY(date)
+      Object.assign(acc, licenses)
+      return acc
+    }, {})
+    return merged
+  }, {})
 
-  function dateFormatter(date: string) {
-    return Intl.DateTimeFormat('en-US', { year: 'numeric' })
-      .format(new Date(date))
-      .toString()
-  }
+  const licenses = [...new Set(itemsOverTime.map((e) => e.licenseName))]
+
   return (
     <Card>
       <CardHeader>
         <CardTitle>Datasets Over Time</CardTitle>
       </CardHeader>
       <CardContent>
-        <AreaChart
-          yAxisWidth={60}
-          data={formatted}
-          categories={['count']}
-          index="formattedDate"
-        />
+        <BarChart width={400} height={500} data={datesWithLicenses}>
+          <Tooltip />
+          <CartesianGrid vertical={false} strokeDasharray={5} />
+          <YAxis />
+          <XAxis dataKey={'date'} />
+          {licenses.map((license) => (
+            <Bar
+              key={license}
+              dataKey={license}
+              stackId={'a'}
+              fill={LICENSES_PALLETTE[license]}
+            />
+          ))}
+          <Legend />
+        </BarChart>
       </CardContent>
     </Card>
   )
