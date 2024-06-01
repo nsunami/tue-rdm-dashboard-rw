@@ -47,7 +47,7 @@ const HomePage = () => {
           </CardFooter>
         </Card>
         <ItemsTotalCell />
-        <ItemsOverTimeCell timeFrame="year" />
+        <ItemsOverTimeCell timeFrame="year" groupBy="license" />
         <LicensesCell />
       </section>
     </>

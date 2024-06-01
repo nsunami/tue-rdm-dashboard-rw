@@ -11,18 +11,31 @@ type TimeFrameType = 'week' | 'month' | 'year'
 
 export function itemsOverTime({
   timeFrame = 'week',
+  groupBy = 'license',
 }: {
   timeFrame: TimeFrameType
+  groupBy: 'license' | 'none'
 }) {
-  const result = db.$queryRaw`
+  if (groupBy == 'none') {
+    return db.$queryRaw`
   SELECT
     DATE_TRUNC(${timeFrame}, published_date) AS date,
     COUNT(*) as count
   FROM "Item"
-  GROUP BY date ORDER BY date
+  GROUP BY date license ORDER BY date
   `
-
-  return result
+  } else if (groupBy == 'license') {
+    return db.$queryRaw`
+  SELECT
+    DATE_TRUNC(${timeFrame}, published_date) AS date,
+    "licenseId",
+    COUNT(*) AS count,
+    "License".name as "licenseName"
+  FROM "Item"
+  LEFT JOIN "License" ON "Item"."licenseId" = "License".id
+  GROUP BY date, "licenseId", "License".name ORDER BY date
+    `
+  }
 }
 
 export function itemsTotal() {
