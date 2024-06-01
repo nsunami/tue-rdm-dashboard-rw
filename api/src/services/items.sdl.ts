@@ -22,7 +22,7 @@ export function itemsOverTime({
     DATE_TRUNC(${timeFrame}, published_date) AS date,
     COUNT(*) as count
   FROM "Item"
-  GROUP BY date license ORDER BY date
+  GROUP BY date ORDER BY date
   `
   } else if (groupBy == 'license') {
     return db.$queryRaw`
