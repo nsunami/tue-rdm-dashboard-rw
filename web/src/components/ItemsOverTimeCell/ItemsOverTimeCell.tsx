@@ -82,7 +82,7 @@ export const Success = ({
       <CardHeader>
         <CardTitle>Datasets Over Time</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex justify-center">
         <BarChart width={400} height={500} data={datesWithLicenses}>
           <Tooltip />
           <CartesianGrid vertical={false} strokeDasharray={5} />
