@@ -30,6 +30,6 @@ export const failure: StoryObj<typeof Failure> = {
 
 export const success: StoryObj<typeof Success> = {
   render: (args) => {
-    return Success ? <Success {...standard()} {...args} /> : <></>
+    return Success ? <Success itemsOverTime={standard()} {...args} /> : <></>
   },
 }
