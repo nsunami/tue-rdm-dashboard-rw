@@ -49,7 +49,6 @@ export const Success = ({ licenseCounts }: CellSuccessProps<LicensesQuery>) => {
     (accumulator, currentLicense) => accumulator + currentLicense.count,
     0
   )
-  console.log(licenseCounts)
   return (
     <>
       <Card>
