@@ -1,6 +1,6 @@
 // Define your own mock data here:
 export const standard = (/* vars, { ctx, req } */) => ({
-  licenses: [
+  licenseCounts: [
     {
       __typename: 'LicenseCount',
       name: '4TU General Terms of Use',
