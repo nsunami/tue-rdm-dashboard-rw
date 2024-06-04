@@ -18,7 +18,7 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
         <h1 className="mx-1 font-bold">
           <Link to={routes.home()}>4TU.RD - TU/e Dashboard</Link>
         </h1>
-        <NavigationMenu>
+        <NavigationMenu className="ml-4">
           <NavigationMenuList>
             <Link to={routes.home()}>
               <NavigationMenuItem className={navigationMenuTriggerStyle()}>
