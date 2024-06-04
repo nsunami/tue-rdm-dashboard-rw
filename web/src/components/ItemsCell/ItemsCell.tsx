@@ -19,6 +19,13 @@ import {
 
 import { Badge } from '../ui/badge'
 import { Button } from '../ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../ui/card'
 import { DropdownMenu } from '../ui/dropdown-menu'
 
 export const QUERY: TypedDocumentNode<ItemsQuery, ItemsQueryVariables> = gql`
@@ -38,7 +45,35 @@ export const QUERY: TypedDocumentNode<ItemsQuery, ItemsQueryVariables> = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => (
+  <>
+    <div className="mx-2 flex items-center gap-2">
+      <div className="h-8 w-32 animate-pulse bg-slate-200"></div>
+    </div>
+    <div className="w-full md:m-2 md:grid md:grid-cols-2 md:gap-2 lg:grid-cols-3">
+      {Array.from({ length: 10 }).map((_, i) => {
+        return (
+          <Card key={i} className="*:animate-pulse">
+            <CardHeader>
+              <CardTitle>
+                <div className="h-8 w-3/4 rounded-md bg-slate-200"></div>
+              </CardTitle>
+              <CardDescription className="flex flex-row place-content-between *:h-4 *:bg-slate-200">
+                <span className="w-1/3" />
+                <span className="w-1/4" />
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-3 *:h-4 *:bg-slate-200">
+              <div className="w-full"></div>
+              <div className="w-full"></div>
+              <div className="w-3/4"></div>
+            </CardContent>
+          </Card>
+        )
+      })}
+    </div>
+  </>
+)
 
 export const Empty = () => <div>Empty</div>
 

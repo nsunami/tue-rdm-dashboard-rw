@@ -20,7 +20,16 @@ export const QUERY: TypedDocumentNode<
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => (
+  <Card className="animate-pulse">
+    <CardHeader>
+      <div className="h-8 w-2/3 rounded-md bg-slate-200"></div>
+    </CardHeader>
+    <CardContent className="flex flex-col items-center">
+      <div className="h-8 w-1/2 bg-slate-200"></div>
+    </CardContent>
+  </Card>
+)
 
 export const Empty = () => <div>Empty</div>
 

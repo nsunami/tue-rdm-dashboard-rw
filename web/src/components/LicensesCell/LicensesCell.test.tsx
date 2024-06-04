@@ -36,7 +36,7 @@ describe('LicensesCell', () => {
 
   it('renders Success successfully', async () => {
     expect(() => {
-      render(<Success licenseCounts={standard().licenses} />)
+      render(<Success licenseCounts={standard().licenseCounts} />)
     }).not.toThrow()
   })
 })

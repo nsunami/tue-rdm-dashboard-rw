@@ -24,7 +24,19 @@ export const QUERY: TypedDocumentNode<
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => (
+  <Card className="animate-pulse">
+    <CardHeader>
+      <div className="h-8 w-1/3 rounded-md bg-slate-200"></div>
+    </CardHeader>
+    <CardContent className="mt-4 flex max-w-md flex-col justify-center gap-8 *:h-8 *:rounded-md *:bg-slate-200">
+      <div className="w-96"></div>
+      <div className="w-72"></div>
+      <div className="w-64"></div>
+      <div className="w-52"></div>
+    </CardContent>
+  </Card>
+)
 
 export const Empty = () => <div>Empty</div>
 
@@ -37,7 +49,6 @@ export const Success = ({ licenseCounts }: CellSuccessProps<LicensesQuery>) => {
     (accumulator, currentLicense) => accumulator + currentLicense.count,
     0
   )
-
   return (
     <>
       <Card>

@@ -37,7 +37,19 @@ export const QUERY: TypedDocumentNode<
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => (
+  <Card className="animate-pulse">
+    <CardHeader>
+      <div className="h-8 w-2/3 rounded-md bg-slate-200"></div>
+    </CardHeader>
+    <CardContent className="flex max-w-md flex-row items-end justify-center gap-8 *:w-8 *:rounded-md *:bg-slate-200">
+      <div className="h-52"></div>
+      <div className="h-64"></div>
+      <div className="h-72"></div>
+      <div className="h-96"></div>
+    </CardContent>
+  </Card>
+)
 
 export const Empty = () => <div>Empty</div>
 
