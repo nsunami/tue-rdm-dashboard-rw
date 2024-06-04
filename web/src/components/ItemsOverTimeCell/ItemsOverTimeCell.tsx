@@ -3,6 +3,7 @@ import {
   BarChart,
   CartesianGrid,
   Legend,
+  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
@@ -94,22 +95,24 @@ export const Success = ({
       <CardHeader>
         <CardTitle>Datasets Over Time</CardTitle>
       </CardHeader>
-      <CardContent className="flex justify-center">
-        <BarChart width={400} height={500} data={datesWithLicenses}>
-          <Tooltip />
-          <CartesianGrid vertical={false} strokeDasharray={5} />
-          <YAxis />
-          <XAxis dataKey={'date'} />
-          {licenses.map((license) => (
-            <Bar
-              key={license}
-              dataKey={license}
-              stackId={'a'}
-              fill={LICENSES_PALLETTE[license]}
-            />
-          ))}
-          <Legend />
-        </BarChart>
+      <CardContent>
+        <ResponsiveContainer width={'100%'} height={500}>
+          <BarChart data={datesWithLicenses}>
+            <Tooltip />
+            <CartesianGrid vertical={false} strokeDasharray={5} />
+            <YAxis />
+            <XAxis dataKey={'date'} />
+            {licenses.map((license) => (
+              <Bar
+                key={license}
+                dataKey={license}
+                stackId={'a'}
+                fill={LICENSES_PALLETTE[license]}
+              />
+            ))}
+            <Legend />
+          </BarChart>
+        </ResponsiveContainer>
       </CardContent>
     </Card>
   )
