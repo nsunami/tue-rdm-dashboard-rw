@@ -27,13 +27,13 @@ export const QUERY: TypedDocumentNode<
 export const Loading = () => (
   <Card className="animate-pulse">
     <CardHeader>
-      <div className="h-8 w-1/3 rounded-md bg-slate-200"></div>
+      <div className="h-8 w-full rounded-md bg-slate-200"></div>
     </CardHeader>
     <CardContent className="mt-4 flex max-w-md flex-col justify-center gap-8 *:h-8 *:rounded-md *:bg-slate-200">
-      <div className="w-96"></div>
-      <div className="w-72"></div>
-      <div className="w-64"></div>
-      <div className="w-52"></div>
+      <div className="w-full"></div>
+      <div className="w-3/4"></div>
+      <div className="w-1/2"></div>
+      <div className="w-1/4"></div>
     </CardContent>
   </Card>
 )
