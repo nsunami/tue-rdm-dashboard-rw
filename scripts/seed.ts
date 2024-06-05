@@ -1,65 +1,85 @@
-import type { Prisma } from '@prisma/client'
 import { db } from 'api/src/lib/db'
 
+import type { ItemDetails } from './types/ItemDetails'
+import type { ItemSummary } from './types/ItemSummary'
+import { getInputData } from './utils/converters'
 export default async () => {
   try {
-    //
-    // Manually seed via `yarn rw prisma db seed`
-    // Seeds automatically with `yarn rw prisma migrate dev` and `yarn rw prisma migrate reset`
-    //
-    // Update "const data = []" to match your data model and seeding needs
-    //
-    const data: Prisma.UserExampleCreateArgs['data'][] = [
-      // To try this example data with the UserExample model in schema.prisma,
-      // uncomment the lines below and run 'yarn rw prisma migrate dev'
-      //
-      // { name: 'alice', email: 'alice@example.com' },
-      // { name: 'mark', email: 'mark@example.com' },
-      // { name: 'jackie', email: 'jackie@example.com' },
-      // { name: 'bob', email: 'bob@example.com' },
-    ]
-    console.log(
-      "\nUsing the default './scripts/seed.ts' template\nEdit the file to add seed data\n"
-    )
-
-    if ((await db.userExample.count()) === 0) {
-      // Note: if using PostgreSQL, using `createMany` to insert multiple records is much faster
-      // @see: https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#createmany
-      await Promise.all(
-        //
-        // Change to match your data model and seeding needs
-        //
-        data.map(async (data: Prisma.UserExampleCreateArgs['data']) => {
-          const record = await db.userExample.create({ data })
-          console.log(record)
-        })
-      )
-    } else {
-      console.log('Users already seeded')
+    const DEFAULT_LIMIT = 999
+    const TUE_GROUPS = {
+      GENERAL: 28589,
+      STUDENTS: 28631,
     }
 
-    // If using dbAuth and seeding users, you'll need to add a `hashedPassword`
-    // and associated `salt` to their record. Here's how to create them using
-    // the same algorithm that dbAuth uses internally:
-    //
-    //   import { hashPassword } from '@redwoodjs/auth-dbauth-api'
-    //
-    //   const users = [
-    //     { name: 'john', email: 'john@example.com', password: 'secret1' },
-    //     { name: 'jane', email: 'jane@example.com', password: 'secret2' }
-    //   ]
-    //
-    //   for (const user of users) {
-    //     const [hashedPassword, salt] = hashPassword(user.password)
-    //     await db.user.create({
-    //       data: {
-    //         name: user.name,
-    //         email: user.email,
-    //         hashedPassword,
-    //         salt
-    //       }
-    //     })
-    //   }
+    console.log(`Preparing to fetch up to ${DEFAULT_LIMIT} items...`)
+
+    const controller = new AbortController()
+    const url = `https://data.4tu.nl/v3/datasets?group_ids=${Object.values(
+      TUE_GROUPS
+    ).toString()}&order=published_date&order_direction=desc&limit=${DEFAULT_LIMIT}`
+
+    console.log(url)
+
+    const items = (await fetch(url, { signal: controller.signal }).then((res) =>
+      res.json()
+    )) as ItemSummary[]
+
+    if (items.length < DEFAULT_LIMIT) {
+      console.log(
+        `Found ${items.length} items, which is less than the limit of ${DEFAULT_LIMIT} items. Good to go! 😊`
+      )
+    } else {
+      console.log(
+        `Found ${items.length} items, but there is more data than the current limit of ${DEFAULT_LIMIT}. You may miss some items. 😔`
+      )
+    }
+
+    console.log(
+      'For each item, fetching detailed metadata & pushing to the database...'
+    )
+
+    const itemsWithoutEmbargoes = items.filter((item) => !item.embargo_title)
+    const embargoedItems = items.filter((item) => item.embargo_title)
+    console.log(
+      `🥷 There are ${embargoedItems.length} embargoed items. Filtering out...`
+    )
+
+    const itemsInDatabase = await db.item.findMany({
+      where: {
+        doi: { in: itemsWithoutEmbargoes.map((i) => i.doi) as string[] },
+      },
+    })
+
+    console.log(
+      itemsInDatabase.length,
+      'items are already in the database -- skipping them...'
+    )
+
+    const newItems = itemsWithoutEmbargoes.filter((item) => {
+      const existingDois = itemsInDatabase.map((i) => i.doi)
+      return !existingDois.includes(item.doi as string)
+    })
+    console.log(newItems.length, 'new items are found.')
+
+    const createdItems = newItems.map(async (i, index) => {
+      process.stdout.write('\r\x1b[K')
+      process.stdout.write(
+        `Processing Item ${index + 1} / ${newItems.length}: ${i.doi}\n`
+      )
+
+      const detailsController = new AbortController()
+      const itemDetails: ItemDetails = await fetch(i.url_public_api, {
+        signal: detailsController.signal,
+      }).then((res) => res.json())
+
+      delete itemDetails.id
+      const inputData = getInputData(itemDetails)
+
+      return await db.item.create({
+        data: { ...inputData, doi: i.doi as string },
+      })
+    })
+    await Promise.all(createdItems)
   } catch (error) {
     console.warn('Please define your seed data.')
     console.error(error)
