@@ -4,11 +4,6 @@
 
 A dashboard for TU/e datasets on 4TU.ResearchData.
 
-Currently, data ingestion is done by a separate Node.js script ([get-4tu-data](https://github.com/nsunami/get-4tu-data)).
-
-
-
-
 ## How to run
 
 The project uses [RedwoodJS](https://redwoodjs.com/)
@@ -24,24 +19,24 @@ Start by installing dependencies:
 yarn install
 ```
 
-Then start the development server:
-
-```bash
-yarn redwood dev
-```
-
-Your browser should automatically open to [http://localhost:8910](http://localhost:8910) where you'll see the Welcome Page, which links out to many great resources.
-
-
-
-## Database
-
-See the [`schema.prisma`](api/db/schema.prisma) file in `api/db`, for the database schema.
-
 Create a `.env` file and set the `DATABASE_URL` to your Postgres instance.
 
 ```bash
 DATABASE_URL=URL_TO_YOUR_POSTGRES
 ```
 
-To populate the database use this separate Node.js script ([get-4tu-data](https://github.com/nsunami/get-4tu-data)).
+Seed the database:
+
+```bash
+yarn rw exec seed
+```
+
+Note: the seeding script can also be used to manually update the app's database with the data at 4TU.ResearchData.
+
+Start the development server:
+
+```bash
+yarn redwood dev
+```
+
+Your browser should automatically open to [http://localhost:8910](http://localhost:8910) where you'll see the Welcome Page, which links out to many great resources.
