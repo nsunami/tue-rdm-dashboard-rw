@@ -21,11 +21,16 @@ export const schema = gql`
     licenseId: Int
     licenseName: String
   }
+  type itemsDateRange {
+    min: DateTime
+    max: DateTime
+  }
 
   type Query {
     Items: [Item!] @skipAuth
     itemsOverTime(timeFrame: String!, groupBy: String!): [ItemsPerTime]
       @skipAuth
     itemsTotal: BigInt @skipAuth
+    itemsDateRange: itemsDateRange @skipAuth
   }
 `
