@@ -95,6 +95,7 @@ export const Success = ({
       onValueChange={(e) => {
         setDateRange({ from: e.from, to: e.to })
       }}
+      className="max-w-52 sm:max-w-72 md:max-w-96"
     >
       {rangeOptions.map((option) => (
         <DateRangePickerItem
