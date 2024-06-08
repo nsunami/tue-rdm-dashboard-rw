@@ -1,29 +1,26 @@
 import { useState } from 'react'
 
-import { Divider } from '@tremor/react'
-import { DateRange } from 'react-day-picker'
-
 import ItemsDateRangePickerCell from '../ItemsDateRangePickerCell'
 import LicensesCell from '../LicensesCell'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 
 const LicensesBarListCard = () => {
-  const [dateRange, setDateRange] = useState<DateRange>({
+  const [dateRange, setDateRange] = useState<{ from: Date; to: Date }>({
     from: null,
     to: null,
   })
-  console.log(dateRange)
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Licenses</CardTitle>
+        <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-center">
+          <CardTitle>Licenses</CardTitle>
+          <ItemsDateRangePickerCell
+            dateRange={dateRange}
+            setDateRange={setDateRange}
+          />
+        </div>
       </CardHeader>
       <CardContent>
-        <ItemsDateRangePickerCell
-          dateRange={dateRange}
-          setDateRange={setDateRange}
-        />
-        <Divider />
         <LicensesCell to={dateRange.to} from={dateRange.from} />
       </CardContent>
     </Card>
