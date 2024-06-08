@@ -24593,6 +24593,7 @@ __metadata:
     autoprefixer: "npm:^10.4.19"
     class-variance-authority: "npm:^0.7.0"
     clsx: "npm:^2.1.1"
+    date-fns: "npm:^3.6.0"
     lucide-react: "npm:^0.379.0"
     postcss: "npm:^8.4.38"
     postcss-loader: "npm:^8.1.1"
