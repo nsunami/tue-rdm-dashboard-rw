@@ -6,6 +6,8 @@ import type {
 
 import { db } from 'src/lib/db'
 
+import { itemsDateRange } from '../items.sdl'
+
 export const licenses: QueryResolvers['licenses'] = () => {
   return db.license.findMany()
 }
@@ -16,13 +18,27 @@ export const license: QueryResolvers['license'] = ({ id }) => {
   })
 }
 
-export const licenseCounts = async () => {
+type LicenseCountsProps = {
+  from: Date
+  to: Date
+}
+
+export const licenseCounts = async ({ from, to }: LicenseCountsProps) => {
+  if (from == null && to == null) {
+    const dateRange = await itemsDateRange()
+    from = dateRange.min
+    to = dateRange.max
+  }
+
   const licenseCounts = await db.license.findMany({
-    select: {
-      name: true,
-      value: true,
+    where: { items: { some: { published_date: { gte: from, lte: to } } } },
+    include: {
       _count: {
         select: { items: true },
+      },
+      items: {
+        where: { published_date: { gte: from, lte: to } },
+        select: { id: true },
       },
     },
   })
@@ -35,8 +51,8 @@ export const licenseCounts = async () => {
   return licenseCounts.map((e) => {
     return {
       name: e.name,
-      count: e._count.items,
-      prop: e._count.items / itemsTotal,
+      count: e.items.length,
+      prop: e.items.length / itemsTotal,
       value: e.value,
     }
   })

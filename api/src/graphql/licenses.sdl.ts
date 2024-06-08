@@ -10,7 +10,7 @@ export const schema = gql`
   type Query {
     licenses: [License!]! @requireAuth
     license(id: Int!): License @requireAuth
-    licenseCounts: [LicenseCount] @skipAuth
+    licenseCounts(from: DateTime, to: DateTime): [LicenseCount] @skipAuth
   }
   type LicenseCount {
     count: Int
