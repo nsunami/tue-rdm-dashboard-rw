@@ -1,7 +1,5 @@
 import { Dispatch } from 'react'
 
-import { DateRangePicker, DateRangePickerItem } from '@tremor/react'
-import { endOfYear, startOfYear, subYears } from 'date-fns'
 import type {
   FindItemsDateRangePickerQuery,
   FindItemsDateRangePickerQueryVariables,
@@ -12,6 +10,8 @@ import type {
   CellFailureProps,
   TypedDocumentNode,
 } from '@redwoodjs/web'
+
+import DateRangePicker from '../DateRangePicker/DateRangePicker'
 
 export const QUERY: TypedDocumentNode<
   FindItemsDateRangePickerQuery,
@@ -61,52 +61,11 @@ export const Success = ({
   const minDate = new Date(itemsDateRange.min)
   const maxDate = new Date(itemsDateRange.max)
 
-  const rangeOptions = [
-    { name: 'All', from: minDate, to: maxDate },
-    { name: 'Year to date', from: startOfYear(new Date()), to: new Date() },
-    {
-      name: 'Last year',
-      from: startOfYear(subYears(new Date(), 1)),
-      to: endOfYear(subYears(new Date(), 1)),
-    },
-    {
-      name: 'Last 2 years',
-      from: subYears(new Date(), 2),
-      to: new Date(),
-    },
-    {
-      name: 'Last 5 years',
-      from: subYears(new Date(), 5),
-      to: new Date(),
-    },
-    {
-      name: '5 years or older',
-      from: minDate,
-      to: subYears(new Date(), 5),
-    },
-  ]
-
   return (
     <DateRangePicker
-      defaultValue={{
-        from: minDate,
-        to: maxDate,
-      }}
-      onValueChange={(e) => {
-        setDateRange({ from: e.from, to: e.to })
-      }}
-      className="max-w-52 sm:max-w-72 md:max-w-96"
-    >
-      {rangeOptions.map((option) => (
-        <DateRangePickerItem
-          key={option.name}
-          value={option.name.toString()}
-          to={option.to}
-          from={option.from}
-        >
-          {option.name}
-        </DateRangePickerItem>
-      ))}
-    </DateRangePicker>
+      minDate={minDate}
+      maxDate={maxDate}
+      onChange={setDateRange}
+    ></DateRangePicker>
   )
 }

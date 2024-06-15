@@ -1,4 +1,5 @@
 import { render } from '@redwoodjs/testing/web'
+
 import { Loading, Empty, Failure, Success } from './ItemsDateRangePickerCell'
 import { standard } from './ItemsDateRangePickerCell.mock'
 
@@ -35,7 +36,13 @@ describe('ItemsDateRangePickerCell', () => {
 
   it('renders Success successfully', async () => {
     expect(() => {
-      render(<Success itemsDateRangePicker={standard().itemsDateRangePicker} />)
+      render(
+        <Success
+          itemsDateRange={standard().itemsDateRange}
+          dateRange={standard().dateRange}
+          setDateRange={standard().setDateRange}
+        />
+      )
     }).not.toThrow()
   })
 })
