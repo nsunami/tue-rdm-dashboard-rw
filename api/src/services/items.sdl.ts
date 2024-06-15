@@ -41,3 +41,15 @@ export function itemsOverTime({
 export function itemsTotal() {
   return db.item.count()
 }
+
+export function itemsDateRange() {
+  return db.item
+    .aggregate({
+      _min: { published_date: true },
+      _max: { published_date: true },
+    })
+    .then((data) => ({
+      min: data._min.published_date,
+      max: data._max.published_date,
+    }))
+}

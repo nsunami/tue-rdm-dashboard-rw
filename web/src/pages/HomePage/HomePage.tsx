@@ -2,6 +2,7 @@ import { Github } from 'lucide-react'
 
 import { Metadata } from '@redwoodjs/web'
 
+import LicensesBarListCard from 'src/components/LicensesBarListCard/LicensesBarListCard'
 import {
   Card,
   CardContent,
@@ -12,7 +13,6 @@ import {
 
 import ItemsOverTimeCell from '../../components/ItemsOverTimeCell'
 import ItemsTotalCell from '../../components/ItemsTotalCell'
-import LicensesCell from '../../components/LicensesCell'
 
 const HomePage = () => {
   return (
@@ -48,7 +48,7 @@ const HomePage = () => {
         </Card>
         <ItemsTotalCell />
         <ItemsOverTimeCell timeFrame="year" groupBy="license" />
-        <LicensesCell />
+        <LicensesBarListCard />
       </section>
     </>
   )
