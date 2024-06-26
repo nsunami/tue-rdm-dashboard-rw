@@ -17,6 +17,7 @@ export const schema = gql`
   type Query {
     authors: [Author!]! @requireAuth
     author(id: Int!): Author @requireAuth
-    authorCounts(from: DateTime, to: DateTime): [AuthorCount] @skipAuth
+    authorCounts(from: DateTime, to: DateTime, top_n: Int): [AuthorCount]
+      @skipAuth
   }
 `
