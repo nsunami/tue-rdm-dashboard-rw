@@ -6,8 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 
 const LicensesBarListCard = () => {
   const [dateRange, setDateRange] = useState<{ from: Date; to: Date }>({
-    from: null,
-    to: null,
+    from: new Date(),
+    to: new Date(),
   })
   return (
     <Card>
@@ -21,7 +21,10 @@ const LicensesBarListCard = () => {
         </div>
       </CardHeader>
       <CardContent>
-        <LicensesCell to={dateRange.to} from={dateRange.from} />
+        <LicensesCell
+          to={dateRange.to.toISOString()}
+          from={dateRange.from.toISOString()}
+        />
       </CardContent>
     </Card>
   )
