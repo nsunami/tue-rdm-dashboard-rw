@@ -1,5 +1,8 @@
 import { BarList } from '@tremor/react'
-import type { QuerylicenseCountsArgs, licenseCounts } from 'types/graphql'
+import type {
+  LicenseCountsQuery,
+  LicenseCountsQueryVariables,
+} from 'types/graphql'
 
 import { routes } from '@redwoodjs/router'
 import type {
@@ -12,10 +15,10 @@ import NoDataFound from '../NoDataFound/NoDataFound'
 import { CardContent } from '../ui/card'
 
 export const QUERY: TypedDocumentNode<
-  licenseCounts,
-  QuerylicenseCountsArgs
+  LicenseCountsQuery,
+  LicenseCountsQueryVariables
 > = gql`
-  query licenseCounts($from: DateTime, $to: DateTime) {
+  query LicenseCountsQuery($from: DateTime, $to: DateTime) {
     licenses: licenseCounts(from: $from, to: $to) {
       name
       count
@@ -42,7 +45,7 @@ export const Failure = ({ error }: CellFailureProps) => (
 
 export const Success = ({
   licenses,
-}: CellSuccessProps<licenseCounts, QuerylicenseCountsArgs>) => {
+}: CellSuccessProps<LicenseCountsQuery, LicenseCountsQueryVariables>) => {
   const itemsTotal = licenses.reduce(
     (accumulator, currentLicense) => accumulator + currentLicense.count,
     0
