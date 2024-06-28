@@ -24,7 +24,15 @@ export const QUERY: TypedDocumentNode<
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => (
+  <div className="mt-4 flex max-w-md animate-pulse flex-col justify-center gap-8 *:h-8 *:rounded-md *:bg-slate-200">
+    <div className={`w-5/6`}></div>
+    <div className={`w-4/6`}></div>
+    <div className={`w-3/6`}></div>
+    <div className={`w-2/6`}></div>
+    <div className={`w-1/6`}></div>
+  </div>
+)
 
 export const Empty = () => <div>Empty</div>
 
