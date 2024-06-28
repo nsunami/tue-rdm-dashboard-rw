@@ -1,5 +1,6 @@
 import { Link, routes } from '@redwoodjs/router'
 
+import Footer from 'src/components/Footer/Footer'
 import {
   NavigationMenuList,
   NavigationMenu,
@@ -34,7 +35,9 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
         </NavigationMenu>
       </header>
       <main>{children}</main>
-      <footer></footer>
+      <footer>
+        <Footer />
+      </footer>
     </>
   )
 }
