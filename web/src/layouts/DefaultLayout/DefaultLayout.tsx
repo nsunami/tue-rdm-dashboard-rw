@@ -30,11 +30,6 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
                 Datasets
               </NavigationMenuItem>
             </Link>
-            <Link to={routes.authors()}>
-              <NavigationMenuItem className={navigationMenuTriggerStyle()}>
-                Authors
-              </NavigationMenuItem>
-            </Link>
           </NavigationMenuList>
         </NavigationMenu>
       </header>
