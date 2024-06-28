@@ -2,6 +2,7 @@ import { Github } from 'lucide-react'
 
 import { Metadata } from '@redwoodjs/web'
 
+import AuthorLeaderboardCard from 'src/components/AuthorLeaderboardCard/AuthorLeaderboardCard'
 import LicensesBarListCard from 'src/components/LicensesBarListCard/LicensesBarListCard'
 import {
   Card,
@@ -49,6 +50,7 @@ const HomePage = () => {
         <ItemsTotalCell />
         <ItemsOverTimeCell timeFrame="year" groupBy="license" />
         <LicensesBarListCard />
+        <AuthorLeaderboardCard />
       </section>
     </>
   )
