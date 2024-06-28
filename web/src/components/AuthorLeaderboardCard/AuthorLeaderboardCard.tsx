@@ -14,7 +14,7 @@ const AuthorLeaderboardCard = () => {
     <Card>
       <CardHeader>
         <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-center">
-          <CardTitle>Top {DEFAULT_TOP_N_AUTHORS} Authors</CardTitle>
+          <CardTitle>Top 10 Authors</CardTitle>
           <ItemsDateRangePickerCell
             dateRange={dateRange}
             setDateRange={setDateRange}
