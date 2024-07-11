@@ -1,3 +1,5 @@
+import type { Item } from 'types/graphql'
+
 import {
   Card,
   CardContent,
@@ -6,8 +8,15 @@ import {
   CardTitle,
 } from '../ui/card'
 
-const Item = ({ item }) => {
-  const { title, description, license, url_public_html, published_date } = item
+const Item = ({ item }: { item: Item }) => {
+  const {
+    title,
+    description,
+    license,
+    url_public_html,
+    published_date,
+    authors,
+  } = item
   const parsedDescription = new DOMParser().parseFromString(
     description,
     'text/html'
@@ -30,9 +39,29 @@ const Item = ({ item }) => {
             {title}
           </a>
         </CardTitle>
-        <CardDescription className="flex flex-row place-content-between">
-          <span>{formatDate(published_date)}</span>
-          <span>{license.name}</span>
+        <CardDescription className="flex flex-col place-content-between">
+          <div className="flex flex-row place-content-between">
+            <span>{formatDate(published_date)}</span>
+            <span>{license.name}</span>
+          </div>
+          <div>
+            {authors.map((author) => (
+              <span
+                key={author.id}
+                className={`
+                after:content-[',_']
+                last:after:content-none
+                only-of-type:after:content-none
+                [&:nth-last-child(2)]:after:content-[",_&_"]
+                first-of-type:[&:nth-last-of-type(2)]:after:content-["_&_"]
+                `}
+              >
+                <a href={`${author.uuid}}`} className="hover:underline">
+                  {author.full_name}
+                </a>
+              </span>
+            ))}
+          </div>
         </CardDescription>
       </CardHeader>
       <CardContent>
