@@ -8,11 +8,18 @@ export const schema = gql`
     description: String!
     url_public_html: String!
     published_date: DateTime!
+    authors: [Author]
   }
 
   type License {
     id: Int
     name: String
+  }
+
+  type Author {
+    id: Int!
+    uuid: String!
+    full_name: String
   }
 
   type ItemsPerTime {
