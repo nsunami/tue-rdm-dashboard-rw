@@ -38,6 +38,10 @@ export const QUERY: TypedDocumentNode<ItemsQuery, ItemsQueryVariables> = gql`
       description
       url_public_html
       published_date
+      authors {
+        uuid
+        full_name
+      }
       license {
         name
       }
